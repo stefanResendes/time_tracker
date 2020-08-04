@@ -11,7 +11,8 @@ let Timetracker = require('./timetracker.model');
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/timetracker', { useNewUrlParser: true });
+/* mongoose.connect('mongodb://127.0.0.1:27017/timetracker', { useNewUrlParser: true }); */
+mongoose.connect('mongodb+srv://stefan_resendes:0Iog1XCoB7UG5jCC@cluster0.jrnw6.mongodb.net/Cluster0?retryWrites=true&w=majority', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {

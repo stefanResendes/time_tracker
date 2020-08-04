@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
 
 export default class TimetrackerList extends Component {
@@ -72,65 +72,67 @@ export default class TimetrackerList extends Component {
 
 
     render() {
+        if (this.state.data == []) {
+            <Text>
+                This is empty
+            </Text>
+        } else {
         return (
-            <div>
-            <View style={styles.navigationRow}>
-                <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('AddTimetracker')}><Text>Add Task</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('About')}><Text>About</Text></TouchableOpacity>
-            </View>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    style = {styles.submitButton}
-                    onPress = {
-                    () => this.refreshTask()
-                }>
-                <Text style = {styles.submitButtonText}> Refresh </Text>
-                </TouchableOpacity>
-                {
-                    this.state.data.map((item, index) => (
-                        <div>
-                            <Text>
-                                {item.timetracker_task}: {this.getTime(item.timetracker_starttime)} - {this.getTime(item.timetracker_endtime)}
-                                {this.addTotalTime(item.timetracker_starttime.toString(), item.timetracker_endtime.toString())}
+            <Fragment>
+                <View style={styles.navigationRow}>
+                    <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('AddTimetracker')}><Text>Add Task</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('About')}><Text>About</Text></TouchableOpacity>
+                </View>
+                <View style={styles.container}>
+                    <TouchableOpacity
+                        style = {styles.submitButton}
+                        onPress = {
+                        () => this.refreshTask()
+                    }>
+                    <Text style = {styles.submitButtonText}> Refresh </Text>
+                    </TouchableOpacity>
+                    {
+                        this.state.data.map((item, index) => (
+                                <Text>
+                                    {item.timetracker_task}: {this.getTime(item.timetracker_starttime)} - {this.getTime(item.timetracker_endtime)}
+                                    
 
-                                <TouchableOpacity
-                                    style = {styles.submitButton}
-                                    onPress = {
-                                        () => { 
-                                            this.props.navigation.navigate('UpdateTimetracker', {id: item._id, task: item.timetracker_task, start: item.timetracker_starttime, end: item.timetracker_endtime});
-                                        }
-                                    }>
-                                    <Text style = {styles.submitButtonText}> Update </Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style = {styles.submitButton}
+                                        onPress = {
+                                            () => { 
+                                                this.props.navigation.navigate('UpdateTimetracker', {id: item._id, task: item.timetracker_task, start: item.timetracker_starttime, end: item.timetracker_endtime});
+                                            }
+                                        }>
+                                        <Text style = {styles.submitButtonText}> Update </Text>
+                                    </TouchableOpacity>
 
-                                <TouchableOpacity
-                                    style = {styles.submitButton}
-                                    onPress = {
-                                        () => { 
-                                            this.deleteTask(item._id);
-                                        }
-                                    }>
-                                    <Text style = {styles.submitButtonText}> Delete </Text>
-                                </TouchableOpacity>
-                            </Text>
-                        </div>
-                    ))
-                }
-                <Text>
-                    Total Time Spent: {this.totalTime} hours
-                </Text>
-            </View>
-            </div>
+                                    <TouchableOpacity
+                                        style = {styles.submitButton}
+                                        onPress = {
+                                            () => { 
+                                                this.deleteTask(item._id);
+                                            }
+                                        }>
+                                        <Text style = {styles.submitButtonText}> Delete </Text>
+                                    </TouchableOpacity>
+                                </Text>
+                        ))
+                    }
+                    <Text>
+                        Total Time Spent: {this.totalTime} hours
+                    </Text>
+                </View>
+            </Fragment>
         )
+        }
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#fff'
     },
     navigationRow: {
         flexDirection:"row",

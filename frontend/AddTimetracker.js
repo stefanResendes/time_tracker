@@ -33,12 +33,9 @@ export default class AddTimetracker extends Component {
 
     render() {
         return (
-            <div>
-            <View style={styles.navigationRow}>
+            <View style={styles.container}>
                 <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('TimetrackerList')}><Text>Tracker List</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.submitButton} onPress={() => this.props.navigation.navigate('About')}><Text>About</Text></TouchableOpacity>
-            </View>
-            <View style={styles.container}>
                 <TextInput style = {styles.input}
                     placeholder = "Task Name"
                     onChangeText = {this.handleTaskName}/>
@@ -90,7 +87,6 @@ export default class AddTimetracker extends Component {
                     <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
             </View>
-            </div>
         )
     }
 }
@@ -98,9 +94,7 @@ export default class AddTimetracker extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#fff'
     },
     input: {
       margin: 15,
